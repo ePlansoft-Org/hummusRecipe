@@ -72,6 +72,13 @@ declare namespace Recipe {
         icon?: AnnotOptionsIcon;
         width?: number;
         height?: number;
+        responseComments?: Array<AnnotReply>;
+    }
+
+    interface AnnotReply {
+        type: string;
+        content: string;
+        createdAt: string;
     }
 
     interface EncryptOptions {
