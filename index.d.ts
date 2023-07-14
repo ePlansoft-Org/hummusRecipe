@@ -12,6 +12,7 @@ declare namespace Recipe {
 
     type AnnotSubtype =
         | "Text"
+        | "Link"
         | "FreeText"
         | "Line"
         | "Square"
@@ -22,11 +23,22 @@ declare namespace Recipe {
         | "Underline"
         | "Squiggly"
         | "StrikeOut"
-        | "Stamp"
         | "Caret"
+        | "Stamp"
         | "Ink"
+        | "Popup"
         | "FileAttachment"
-        | "Sound";
+        | "Sound"
+        | "Movie"
+        | "Screen"
+        | "Widget"
+        | "PrinterMark"
+        | "TrapNet"
+        | "Watermark"
+        | "3D"
+        | "Redact"
+        | "Projection"
+        | "RichMedia";
 
     type AnnotOptionsFlag =
         | "invisible"
@@ -72,13 +84,14 @@ declare namespace Recipe {
         icon?: AnnotOptionsIcon;
         width?: number;
         height?: number;
+        date?: string;
         responseComments?: Array<AnnotReply>;
     }
 
     interface AnnotReply {
-        type: string;
+        type?: string;
+        date?: string;
         content: string;
-        createdAt: string;
     }
 
     interface EncryptOptions {
