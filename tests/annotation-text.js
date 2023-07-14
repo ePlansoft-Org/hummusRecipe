@@ -97,4 +97,103 @@ describe('Annotation: Text Annotations', () => {
             .endPage()
             .endPDF(done);
     });
+
+    it("Add annotation replies to annotations.", (done) => {
+        const output = path.join(__dirname, "../output/annotation-replies.pdf");
+        const recipe = new HummusRecipe("new", output);
+    
+        const replies1 = [{
+            type: 'Text',
+            text: 'first reply to annotation 1',
+            date: '2023-07-07T06:36:28.090Z',
+          }, {
+            type: 'Text',
+            text: 'second reply to annotation 1',
+            date: '2023-07-07T06:40:48.090Z',
+          }, {
+            type: 'Text',
+            text: 'third reply to annotation 1',
+            date: '2023-07-07T06:42:21.090Z',
+          }];
+    
+        
+        const replies2 = [{
+            type: 'Text',
+            text: 'first reply to annotation 2',
+            date: '2023-07-10T08:44:32.090Z',
+          }, {
+            type: 'Text',
+            text: 'second reply to annotation 2',
+            date: '2023-07-10T08:50:12.090Z',
+          }];
+    
+    
+        recipe
+          .createPage("letter-size")
+          .annot(50, 50, "Highlight", {
+            text: "Yo! I am a lonely Highlight. Annotation 1",
+            width: 100,
+            height: 30,
+            border: 10,
+            color: [255, 128, 128],
+            date: '2023-07-07T04:14:30.090Z',
+            replies: replies1,
+          })
+          .text("This text should be highlighted.", 50, 100)
+          .annot(50, 100, "Highlight", {
+            text: "Yes, it is. Annotation 2",
+            width: 200,
+            height: 18,
+            date: '2023-07-09T18:36:50.090Z',
+            replies: replies2,
+          })
+          .circle(50, 150, 2, { stroke: "#3b7721" })
+          .text("This text should be highlighted as well.", 50, 150, {
+            highlight: true,
+            size: 8,
+          })
+          .text("This text should be highlighted with custom value.", 50, 200, {
+            highlight: {
+              color: [12, 200, 128],
+              text: "Is this a green highlight?",
+            },
+            size: 20,
+          })
+          .text("This text should be underlined with custom value.", 50, 250, {
+            underline: {
+              color: [255, 0, 128],
+              text: "Underline!",
+            },
+            size: 30,
+          })
+          .text(
+            "This text should be Squiggly underlined with custom value.",
+            50,
+            300,
+            {
+              underline: {
+                color: [100, 0, 255],
+                text: "Squiggly!",
+              },
+            }
+          )
+          .text("This text should be striked out with custom value.", 50, 350, {
+            strikeOut: {
+              color: [77, 77, 77],
+              text: "StriketOut!",
+            },
+          })
+          .text("This text should be striked out and highlighted.", 50, 400, {
+            strikeOut: {
+              color: [77, 77, 77],
+              text: "StriketOut!",
+            },
+            highlight: {
+              color: [255, 0, 0],
+            },
+            size: 25,
+          })
+          .endPage()
+          .endPDF(done);
+      });
 });
